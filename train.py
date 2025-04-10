@@ -1,11 +1,12 @@
 import gymnasium as gym
 import pybullet_envs_gymnasium  # This registers the PyBullet environments
 from stable_baselines3 import PPO
+import torch
 
 def train_model():
     device = torch.device("xpu" if torch.xpu.is_available() else "cpu")
     print(f"Using device: {device}")
-    
+
     # Create the environment with a suitable render mode (optional for faster training)
     # For training, it is common to use a non-rendering mode to speed up learning.
     env = gym.make("HumanoidBulletEnv-v0")
