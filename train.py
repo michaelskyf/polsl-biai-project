@@ -1,17 +1,21 @@
 import gymnasium as gym
-import pybullet_envs  # This registers the PyBullet environments
+import torch
+import pybullet_envs_gymnasium
 from stable_baselines3 import PPO
 
 def train_model():
     # Create the environment with a suitable render mode (optional for faster training)
     # For training, it is common to use a non-rendering mode to speed up learning.
     env = gym.make("HumanoidBulletEnv-v0")
-    
-    # Define the PPO agent using a multi-layer perceptron (MLP) policy
-    model = PPO("MlpPolicy", env, verbose=1)
+    print(torch.version.cuda)
+    # Check if CUDA (GPU) is available
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+
+    # Create the model with GPU (if available)
+    model = PPO("MlpPolicy", env, verbose=1, device=device)
     
     # Start training the model for a set number of timesteps
-    model.learn(total_timesteps=200_000)
+    model.learn(total_timesteps=1_000_000)
     
     # Save the trained model for later use
     model.save("ppo_humanoid")

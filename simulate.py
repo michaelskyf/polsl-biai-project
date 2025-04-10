@@ -1,5 +1,5 @@
 import gymnasium as gym
-import pybullet_envs
+import pybullet_envs_gymnasium
 from stable_baselines3 import PPO
 import time
 
