@@ -20,7 +20,7 @@ def train_model():
     
     #model = PPO.load("ppo_humanoid", env=env)
     # Start training the model for a set number of timesteps
-    model.learn(total_timesteps=1_000_000)
+    model.learn(total_timesteps=10_000_000)
     
     # Save the trained model for later use
     model.save("ppo_humanoid")
